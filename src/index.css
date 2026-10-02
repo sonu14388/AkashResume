@@ -1,0 +1,1496 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --text: #172033;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --success: #059669;
+  --danger: #dc2626;
+  --shadow: 0 10px 30px rgba(15,23,42,.08);
+  --shadow-lg: 0 20px 55px rgba(15,23,42,.14);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --resume-width: 794px;
+  --resume-min-height: 1123px;
+}
+
+.dark {
+  --bg: #090d16;
+  --surface: #0f172a;
+  --surface-soft: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --line: #334155;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --shadow: 0 10px 30px rgba(0,0,0,.4);
+  --shadow-lg: 0 20px 55px rgba(0,0,0,.6);
+}
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Custom font classes for resumes & application */
+.font-sans-modern, .font-sans {
+  font-family: 'DM Sans', 'Inter', -apple-system, sans-serif;
+}
+.font-poppins {
+  font-family: 'Poppins', -apple-system, sans-serif;
+}
+.font-outfit {
+  font-family: 'Outfit', -apple-system, sans-serif;
+}
+.font-jakarta {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+}
+.font-montserrat {
+  font-family: 'Montserrat', -apple-system, sans-serif;
+}
+.font-raleway {
+  font-family: 'Raleway', -apple-system, sans-serif;
+}
+.font-dmsans {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+}
+.font-space {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+}
+.font-roboto {
+  font-family: 'Roboto', -apple-system, sans-serif;
+}
+.font-serif-classic, .font-serif {
+  font-family: 'Playfair Display', 'Merriweather', Georgia, serif;
+}
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.font-merriweather {
+  font-family: 'Merriweather', Georgia, serif;
+}
+.font-editorial {
+  font-family: 'Source Sans 3', 'Merriweather', Georgia, serif;
+}
+.font-lora {
+  font-family: 'Lora', Georgia, serif;
+}
+.font-crimson {
+  font-family: 'Crimson Pro', Georgia, serif;
+}
+.font-cinzel {
+  font-family: 'Cinzel', Georgia, serif;
+}
+.font-mono-clean, .font-mono {
+  font-family: 'Roboto Mono', monospace;
+}
+.font-jetbrains {
+  font-family: 'JetBrains Mono', monospace;
+}
+.font-fira {
+  font-family: 'Fira Code', monospace;
+}
+.font-oswald {
+  font-family: 'Oswald', -apple-system, sans-serif;
+}
+
+/* A4 Sheet Dimensions for high-fidelity resume preview & export */
+.resume-a4-page {
+  width: 794px;
+  min-height: 1123px;
+  max-width: 794px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+@media print {
+  .resume-a4-page {
+    width: 210mm;
+    min-height: 297mm;
+    max-width: 210mm;
+  }
+}
+
+/* =========================================================
+   RESUME BUILDER FREE STYLES & DESIGN VARIANTS
+========================================================= */
+
+.designs-section {
+  padding-top: 18px;
+}
+
+.category-list {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 13px;
+}
+
+.category {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: #64748b;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  transition: .18s;
+  cursor: pointer;
+}
+
+.category:hover {
+  border-color: #bfdbfe;
+  color: var(--primary);
+}
+
+.category.active {
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(37,99,235,.2);
+}
+
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+@media (min-width: 640px) {
+  .design-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .design-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.design-card {
+  overflow: hidden;
+  border: 1px solid #e5eaf1;
+  border-radius: 13px;
+  background: #fff;
+  transition: .2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.design-card:hover {
+  transform: translateY(-2px);
+  border-color: #bfdbfe;
+  box-shadow: 0 8px 22px rgba(15,23,42,.08);
+}
+
+.design-card.selected {
+  border: 2px solid var(--primary);
+  box-shadow: 0 7px 22px rgba(37,99,235,.15);
+}
+
+.design-preview {
+  height: 140px;
+  padding: 9px;
+  background: #eef2f7;
+  overflow: hidden;
+}
+
+.design-mini-paper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(15,23,42,.12);
+}
+
+.mini-header {
+  height: 34px;
+  padding: 8px;
+}
+
+.mini-name {
+  width: 43%;
+  height: 5px;
+  border-radius: 3px;
+  opacity: .95;
+}
+
+.mini-line {
+  width: 60%;
+  height: 3px;
+  margin-top: 6px;
+  border-radius: 3px;
+}
+
+.mini-body {
+  padding: 9px;
+}
+
+.mini-section {
+  width: 30%;
+  height: 5px;
+  margin: 5px 0 7px;
+  border-radius: 3px;
+}
+
+.mini-text {
+  width: 88%;
+  height: 3px;
+  margin: 4px 0;
+  border-radius: 3px;
+  background: #dbe3ed;
+}
+
+.mini-text.short {
+  width: 55%;
+}
+
+.design-info {
+  padding: 10px;
+}
+
+.design-number {
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .7px;
+}
+
+.design-name {
+  margin-top: 2px;
+  color: #1e293b;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.design-category {
+  margin-top: 2px;
+  color: #94a3b8;
+  font-size: 10px;
+  text-transform: capitalize;
+}
+
+.use-design {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 7px;
+  background: #eff6ff;
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.use-design:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* =========================================================
+   RESUME OUTPUT CORE & DESIGN VARIANTS
+========================================================= */
+
+.resume {
+  --accent: #2563eb;
+  --accent-light: rgba(37,99,235,.08);
+  color: #1e293b;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #fff;
+}
+
+.resume-header {
+  padding: 38px 44px 26px;
+  border-bottom: 4px solid var(--accent);
+  background: #fff;
+}
+
+.resume-name {
+  margin: 0;
+  color: #111827;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.resume-title {
+  margin-top: 6px;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.contact-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 15px;
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 10.5px;
+}
+
+.contact-line span {
+  white-space: nowrap;
+}
+
+.resume-body {
+  padding: 26px 44px 40px;
+}
+
+.resume-section {
+  margin-bottom: 22px;
+}
+
+.resume-section:last-child {
+  margin-bottom: 0;
+}
+
+.resume .section-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+.resume .section-heading h2 {
+  margin: 0;
+  color: #172033;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.resume .section-line {
+  flex: 1;
+  height: 1px;
+  background: #dbe3ec;
+}
+
+.summary,
+.simple-text,
+.project-description {
+  color: #475569;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.experience,
+.education,
+.project,
+.certification {
+  margin-bottom: 14px;
+}
+
+.experience:last-child,
+.education:last-child,
+.project:last-child,
+.certification:last-child {
+  margin-bottom: 0;
+}
+
+.exp-top,
+.edu-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.exp-role,
+.edu-degree,
+.project-name,
+.cert-name {
+  color: #1e293b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.exp-company,
+.edu-school,
+.project-tech,
+.cert-org {
+  margin-top: 2px;
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.exp-location {
+  margin-top: 2px;
+  color: #94a3b8;
+  font-size: 9.5px;
+}
+
+.exp-date,
+.edu-date,
+.cert-date {
+  flex: 0 0 auto;
+  color: #64748b;
+  font-size: 9.5px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.edu-grade {
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 9.5px;
+}
+
+.bullets {
+  margin: 6px 0 0;
+  padding-left: 16px;
+  color: #475569;
+  font-size: 10.5px;
+  line-height: 1.6;
+}
+
+.bullets li {
+  margin: 2px 0;
+}
+
+.skill-group {
+  margin-bottom: 8px;
+}
+
+.skill-label {
+  margin-bottom: 5px;
+  color: #334155;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skill {
+  padding: 3.5px 8px;
+  border-radius: 6px;
+  color: var(--accent);
+  background: var(--accent-light);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   DESIGN VARIANTS
+========================================================= */
+
+.resume.design-sidebar .resume-header {
+  border-bottom: 0;
+  border-left: 8px solid var(--accent);
+  background: #f8fafc;
+}
+
+.resume.design-bold .resume-header {
+  background: var(--accent);
+  border-bottom: 0;
+}
+
+.resume.design-bold .resume-name,
+.resume.design-bold .contact-line {
+  color: #fff;
+}
+
+.resume.design-bold .resume-title {
+  color: #fff;
+  opacity: .9;
+}
+
+.resume.design-accent .resume-section .section-heading h2 {
+  color: var(--accent);
+}
+
+.resume.design-compact .resume-header {
+  padding: 26px 36px 18px;
+}
+
+.resume.design-compact .resume-body {
+  padding: 18px 36px 28px;
+}
+
+.resume.design-compact .resume-section {
+  margin-bottom: 15px;
+}
+
+.resume.design-elegant .resume-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+}
+
+.resume.design-elegant .resume-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+.resume.design-tech .resume-header {
+  background: #0f172a;
+  border-bottom-color: #38bdf8;
+}
+
+.resume.design-tech .resume-name {
+  color: #fff;
+}
+
+.resume.design-tech .contact-line {
+  color: #cbd5e1;
+}
+
+.resume.design-tech .resume-title {
+  color: #38bdf8;
+}
+
+.resume.design-executive .resume-header {
+  padding-bottom: 32px;
+  border-bottom-width: 6px;
+}
+
+.resume.design-minimal .resume-header {
+  border-bottom: 1px solid #cbd5e1;
+}
+
+.resume.design-minimal .resume-body {
+  padding-top: 22px;
+}
+
+.resume.design-split .resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid var(--accent);
+  background: linear-gradient(to right, #f8fafc, #ffffff);
+}
+
+.resume.design-nordic .resume-header {
+  border-bottom: none;
+  background: #f8fafc;
+  border-left: 6px solid var(--accent);
+}
+
+.resume.design-metro .resume-header {
+  background: #1e293b;
+  color: #fff;
+  border-bottom: 4px solid var(--accent);
+}
+.resume.design-metro .resume-name,
+.resume.design-metro .contact-line {
+  color: #fff;
+}
+.resume.design-metro .resume-title {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.resume.design-timeline .section-heading h2 {
+  position: relative;
+  padding-left: 18px;
+}
+.resume.design-timeline .section-heading h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.resume.design-swiss .resume-name {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.resume.design-swiss .section-heading h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 800;
+}
+
+.resume.design-infographic .skill-chip {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.resume.design-grid .resume-section .section-heading h2 {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 6px;
+}
+
+.resume.design-cascade .resume-header {
+  background: linear-gradient(135deg, var(--accent), #1e293b);
+  color: #fff;
+  border-bottom: none;
+}
+.resume.design-cascade .resume-name,
+.resume.design-cascade .contact-line,
+.resume.design-cascade .resume-title {
+  color: #fff;
+}
+
+/* Dark mode surface and input adaptors */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="tel"],
+.dark input[type="url"],
+.dark input[type="search"],
+.dark input[type="number"],
+.dark textarea,
+.dark select {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Ensure resume preview & export are always on white canvas */
+#resume,
+.resume,
+.resume-a4-page,
+#resume-printable-area,
+#resume-printable-area * {
+  color-scheme: light;
+}
+
+.resume,
+.resume.bg-white,
+#resume-printable-area .bg-white {
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+}
+
+/* Clean custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f3f4;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #dadce0;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* =========================================================
+   PRINT / PDF
+========================================================= */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    width: 210mm;
+    min-width: 210mm;
+    background: #fff !important;
+  }
+
+  body {
+    overflow: visible !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #resume-printable-area, #resume-printable-area * {
+    visibility: visible;
+  }
+
+  #resume-printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+  }
+
+  .resume {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .resume-section,
+  .experience,
+  .education,
+  .project,
+  .certification {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume-section .section-heading {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .resume-header {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* =========================================================
+   WEBGL 3D APPLICATION SHELL
+   The resume paper stays intentionally flat for ATS parsing and PDF export.
+========================================================= */
+@media screen {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    background: #060b18;
+  }
+
+  .three-d-app {
+    position: relative;
+    isolation: isolate;
+    overflow-x: clip;
+    background: transparent !important;
+  }
+
+  .three-d-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .three-d-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 16% 18%, rgba(37, 99, 235, 0.24), transparent 31%),
+      radial-gradient(circle at 85% 22%, rgba(124, 58, 237, 0.2), transparent 30%),
+      radial-gradient(circle at 50% 100%, rgba(6, 182, 212, 0.14), transparent 42%),
+      #060b18;
+  }
+
+  .three-d-stage canvas {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0.88;
+  }
+
+  .three-d-stage__vignette,
+  .three-d-stage__scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .three-d-stage__vignette {
+    background: radial-gradient(ellipse at center, transparent 28%, rgba(2, 6, 23, 0.42) 100%);
+  }
+
+  .three-d-stage__scanlines {
+    opacity: 0.12;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 100% 5px;
+    mix-blend-mode: screen;
+  }
+
+  .three-d-stage--home canvas {
+    opacity: 0.95;
+  }
+
+  .three-d-stage--builder canvas {
+    opacity: 0.72;
+  }
+
+  .three-d-stage--templates canvas {
+    opacity: 0.86;
+  }
+
+  .three-d-stage--dashboard canvas {
+    opacity: 0.8;
+  }
+
+  .three-d-navbar {
+    background: rgba(7, 13, 30, 0.76) !important;
+    border-color: rgba(148, 163, 184, 0.2) !important;
+    box-shadow: 0 16px 42px rgba(2, 6, 23, 0.28), inset 0 -1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+  }
+
+  .three-d-main,
+  .three-d-view {
+    position: relative;
+    z-index: 1;
+    perspective: 1600px;
+  }
+
+  .three-d-view > section {
+    background-color: rgba(248, 250, 252, 0.76) !important;
+    border-color: rgba(148, 163, 184, 0.28) !important;
+    backdrop-filter: blur(18px) saturate(118%);
+    -webkit-backdrop-filter: blur(18px) saturate(118%);
+  }
+
+  .dark .three-d-view > section {
+    background-color: rgba(7, 13, 30, 0.68) !important;
+    border-color: rgba(71, 85, 105, 0.42) !important;
+  }
+
+  .three-d-view .bg-white:not(.resume-a4-page):not(.resume) {
+    background-color: rgba(255, 255, 255, 0.78) !important;
+    border-color: rgba(148, 163, 184, 0.28) !important;
+    backdrop-filter: blur(16px) saturate(125%);
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
+  }
+
+  .dark .three-d-view .bg-white:not(.resume-a4-page):not(.resume) {
+    background-color: rgba(15, 23, 42, 0.78) !important;
+    border-color: rgba(71, 85, 105, 0.46) !important;
+  }
+
+  .three-d-view .rounded-2xl:not(.resume-a4-page):not(.resume) {
+    transform-style: preserve-3d;
+    box-shadow:
+      0 18px 42px rgba(2, 6, 23, 0.13),
+      0 2px 0 rgba(255, 255, 255, 0.34) inset,
+      0 -1px 0 rgba(15, 23, 42, 0.08) inset;
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  }
+
+  .three-d-view .rounded-2xl:not(.resume-a4-page):not(.resume):hover {
+    transform: translateY(-3px) rotateX(0.45deg);
+    box-shadow:
+      0 24px 52px rgba(2, 6, 23, 0.2),
+      0 2px 0 rgba(255, 255, 255, 0.42) inset,
+      0 -1px 0 rgba(15, 23, 42, 0.1) inset;
+  }
+
+  .three-d-view button:not(:disabled) {
+    transform-style: preserve-3d;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  }
+
+  .three-d-view button:not(:disabled):hover {
+    transform: translateY(-1px) translateZ(5px);
+    filter: saturate(1.08);
+  }
+
+  .three-d-view input,
+  .three-d-view textarea,
+  .three-d-view select {
+    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.07), inset 0 1px rgba(255, 255, 255, 0.42);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .three-d-view input:focus,
+  .three-d-view textarea:focus,
+  .three-d-view select:focus {
+    transform: translateZ(4px);
+    box-shadow: 0 12px 26px rgba(37, 99, 235, 0.14), 0 0 0 3px rgba(59, 130, 246, 0.12);
+  }
+
+  .three-d-view .resume-a4-page,
+  .three-d-view .resume {
+    transform: none !important;
+    box-shadow: 0 26px 70px rgba(2, 6, 23, 0.34) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .three-d-view #resume-printable-area,
+  .three-d-view #resume-printable-area .bg-white {
+    background-color: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  @media (max-width: 767px) {
+    .three-d-stage canvas {
+      opacity: 0.58;
+    }
+
+    .three-d-stage__scanlines {
+      opacity: 0.07;
+    }
+
+    .three-d-view .rounded-2xl:not(.resume-a4-page):not(.resume):hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .three-d-stage canvas {
+      opacity: 0.42;
+    }
+
+    .three-d-view .rounded-2xl:not(.resume-a4-page):not(.resume),
+    .three-d-view button,
+    .three-d-view input,
+    .three-d-view textarea,
+    .three-d-view select {
+      transition: none !important;
+    }
+  }
+}
+
+/* =========================================================
+   ORANGE / CHARCOAL EDITORIAL HERO
+   Inspired by the supplied composition, rebuilt with original WebGL objects.
+========================================================= */
+@media screen {
+  body {
+    background: #242424;
+    font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .three-d-stage {
+    background:
+      radial-gradient(circle at 10% 24%, rgba(238, 100, 36, 0.22), transparent 28%),
+      radial-gradient(circle at 88% 80%, rgba(247, 178, 103, 0.12), transparent 24%),
+      #242424;
+  }
+
+  .three-d-stage--home canvas {
+    opacity: 0.2;
+  }
+
+  .three-d-stage__vignette {
+    background: radial-gradient(ellipse at center, transparent 26%, rgba(16, 16, 16, 0.58) 100%);
+  }
+
+  .three-d-navbar {
+    background: rgba(30, 30, 30, 0.94) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.28), inset 0 -1px rgba(255, 255, 255, 0.08);
+  }
+
+  .home-3d-view {
+    background: #242424 !important;
+    color: #fff;
+  }
+
+  .home-3d-view > section:not(.hero-3d-section) {
+    background: #242424 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .home-3d-view > section:not(.hero-3d-section) .bg-white,
+  .home-3d-view > section:not(.hero-3d-section) .bg-\[\#f8fafd\] {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .home-3d-view > section:not(.hero-3d-section) h2,
+  .home-3d-view > section:not(.hero-3d-section) h3 {
+    color: #fff !important;
+  }
+
+  .home-3d-view > section:not(.hero-3d-section) p,
+  .home-3d-view > section:not(.hero-3d-section) span {
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .hero-3d-section {
+    position: relative;
+    padding: 18px 18px 34px;
+    background: #242424 !important;
+    border: 0 !important;
+  }
+
+  .hero-3d-frame {
+    position: relative;
+    isolation: isolate;
+    width: min(1500px, 100%);
+    min-height: min(760px, calc(100vh - 110px));
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 30px;
+    color: #fff;
+    background:
+      radial-gradient(circle at 22% 70%, rgba(255, 214, 165, 0.16), transparent 24%),
+      radial-gradient(circle at 94% 18%, rgba(45, 25, 17, 0.24), transparent 28%),
+      linear-gradient(135deg, #b94f1e 0%, #b6531f 48%, #a9461a 100%);
+    box-shadow: 0 35px 90px rgba(0, 0, 0, 0.46), inset 0 1px rgba(255, 238, 220, 0.28);
+  }
+
+  .hero-3d-frame::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: '';
+    opacity: 0.26;
+    background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.13) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent 74%);
+  }
+
+  .hero-3d-pattern {
+    position: absolute;
+    z-index: -1;
+    width: 240px;
+    height: 160px;
+    opacity: 0.16;
+    background: #1f1f1f;
+    clip-path: polygon(0 50%, 50% 0, 100% 50%, 50% 100%);
+  }
+
+  .hero-3d-pattern--top {
+    top: -70px;
+    right: 190px;
+    transform: rotate(5deg) scale(1.6);
+  }
+
+  .hero-3d-pattern--bottom {
+    right: -45px;
+    bottom: -60px;
+    transform: rotate(-14deg) scale(1.55);
+  }
+
+  .hero-3d-nav {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px clamp(22px, 4vw, 60px);
+  }
+
+  .hero-3d-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: #fff;
+    text-align: left;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-3d-brand-mark {
+    display: inline-flex;
+    width: 37px;
+    height: 37px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    color: #b85320;
+    background: #fff4e9;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    box-shadow: 0 9px 22px rgba(60, 19, 8, 0.2);
+  }
+
+  .hero-3d-brand strong,
+  .hero-3d-brand em {
+    display: block;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 1;
+  }
+
+  .hero-3d-brand em {
+    margin-top: 4px;
+    color: rgba(255, 239, 224, 0.68);
+    font-size: 9px;
+    letter-spacing: 0.34em;
+  }
+
+  .hero-3d-links {
+    align-items: center;
+    color: rgba(255, 247, 240, 0.76);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hero-3d-links button {
+    transition: color 180ms ease, transform 180ms ease;
+  }
+
+  .hero-3d-links button:hover {
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  .hero-3d-search-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 148px;
+    padding: 9px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    color: rgba(255, 247, 240, 0.66);
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+
+  .hero-3d-search-pill span {
+    color: #fff;
+    font-size: 19px;
+    line-height: 0.5;
+  }
+
+  .hero-3d-nav-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 247, 240, 0.76);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hero-3d-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffd2a6;
+    box-shadow: 0 0 0 5px rgba(255, 210, 166, 0.12), 0 0 18px rgba(255, 210, 166, 0.85);
+  }
+
+  .hero-3d-layout {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    min-height: 520px;
+    grid-template-columns: minmax(0, 1.12fr) minmax(330px, 0.88fr);
+    align-items: center;
+    padding: 6px clamp(22px, 4vw, 60px) 0;
+  }
+
+  .hero-3d-scene-shell {
+    position: relative;
+    min-height: 505px;
+  }
+
+  .three-d-hero-visual {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .three-d-hero-visual canvas {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .three-d-hero-visual__glow {
+    position: absolute;
+    left: 14%;
+    bottom: 8%;
+    width: 44%;
+    height: 18%;
+    pointer-events: none;
+    border-radius: 50%;
+    background: rgba(55, 25, 15, 0.5);
+    filter: blur(28px);
+  }
+
+  .hero-3d-scene-label {
+    position: absolute;
+    bottom: 17px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: rgba(255, 247, 240, 0.68);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .hero-3d-scene-label span:first-child {
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: -0.05em;
+  }
+
+  .hero-3d-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 540px;
+    padding: 20px 0 28px 4%;
+  }
+
+  .hero-3d-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 22px;
+    color: #ffe0c2;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .hero-3d-copy h1 {
+    margin: 0;
+    color: #fffaf6;
+    font-size: clamp(3.3rem, 6.3vw, 6.75rem);
+    font-weight: 900;
+    letter-spacing: -0.075em;
+    line-height: 0.86;
+    text-transform: uppercase;
+  }
+
+  .hero-3d-copy h1 span {
+    display: block;
+  }
+
+  .hero-3d-copy h1 span:last-child {
+    color: #252525;
+  }
+
+  .hero-3d-copy p {
+    max-width: 405px;
+    margin: 28px 0 0;
+    color: rgba(255, 247, 240, 0.72);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .hero-3d-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 11px;
+    margin-top: 28px;
+  }
+
+  .hero-3d-primary,
+  .hero-3d-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 46px;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  }
+
+  .hero-3d-primary {
+    color: #fff;
+    background: #222;
+    box-shadow: 0 13px 25px rgba(46, 17, 8, 0.28);
+  }
+
+  .hero-3d-primary:hover,
+  .hero-3d-secondary:hover {
+    transform: translateY(-3px);
+  }
+
+  .hero-3d-primary:hover {
+    background: #111;
+    box-shadow: 0 18px 30px rgba(46, 17, 8, 0.36);
+  }
+
+  .hero-3d-secondary {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.74);
+    background: transparent;
+  }
+
+  .hero-3d-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .hero-3d-proof-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 28px;
+    color: rgba(255, 247, 240, 0.72);
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .hero-3d-proof-row span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .hero-3d-proof-row svg {
+    color: #ffd2a6;
+  }
+
+  .hero-3d-footerline {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 10px clamp(22px, 4vw, 60px) 0;
+    padding: 17px 0 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    color: rgba(255, 247, 240, 0.58);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .hero-3d-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .hero-3d-layout {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 0;
+    }
+
+    .hero-3d-scene-shell {
+      min-height: 385px;
+    }
+
+    .hero-3d-copy {
+      max-width: 620px;
+      margin: -18px auto 0;
+      padding: 10px 0 34px;
+      text-align: center;
+    }
+
+    .hero-3d-kicker,
+    .hero-3d-actions,
+    .hero-3d-proof-row {
+      justify-content: center;
+    }
+
+    .hero-3d-copy p {
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .hero-3d-copy h1 span:last-child {
+      color: #fffaf6;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .hero-3d-section {
+      padding: 10px 10px 20px;
+    }
+
+    .hero-3d-frame {
+      min-height: auto;
+      border-radius: 22px;
+    }
+
+    .hero-3d-nav {
+      padding: 17px 17px 6px;
+    }
+
+    .hero-3d-nav-status {
+      font-size: 8px;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-3d-layout {
+      padding-right: 17px;
+      padding-left: 17px;
+    }
+
+    .hero-3d-scene-shell {
+      min-height: 330px;
+    }
+
+    .hero-3d-copy h1 {
+      font-size: clamp(3rem, 17vw, 5rem);
+    }
+
+    .hero-3d-copy p {
+      font-size: 12px;
+    }
+
+    .hero-3d-primary,
+    .hero-3d-secondary {
+      width: 100%;
+    }
+
+    .hero-3d-footerline {
+      margin-right: 17px;
+      margin-left: 17px;
+      font-size: 8px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-3d-primary,
+    .hero-3d-secondary,
+    .hero-3d-links button {
+      transition: none;
+    }
+  }
+}
